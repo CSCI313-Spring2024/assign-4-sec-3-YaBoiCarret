@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactService } from '../../services/contact.service';
 import { Contact } from '../../models/contact';
-import { FormsModule } from '@angular/forms'; 
-import { NgIf } from '@angular/common';       
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [FormsModule, NgIf], 
+  imports: [FormsModule, NgIf],
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.css']
 })
@@ -31,7 +31,8 @@ export class ContactFormComponent implements OnInit {
         this.isEditMode = true;
       }
     } else {
-      this.contact.id = Date.now(); 
+ 
+      this.contact.id = Date.now();
     }
   }
 
@@ -39,8 +40,9 @@ export class ContactFormComponent implements OnInit {
     if (this.isEditMode) {
       this.contactService.updateContact(this.contact);
     } else {
-      this.contactService.addContact(this.contact);
+      this.contactService.addContact({ ...this.contact });  
     }
-    this.router.navigate(['/']);
+
+    this.router.navigate(['/']);  
   }
 }
